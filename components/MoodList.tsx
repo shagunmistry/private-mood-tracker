@@ -57,16 +57,19 @@ export default function MoodList({ entries, onUpdate }: MoodListProps) {
 
   if (entries.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
-        <p className="text-lg">No mood entries yet.</p>
-        <p className="text-sm mt-2">Start tracking your mood above!</p>
+      <div className="text-center py-12" style={{ color: "var(--foreground-secondary)" }}>
+        <div className="text-5xl mb-4">📖</div>
+        <p className="text-base sm:text-lg font-medium mb-2" style={{ color: "var(--foreground)" }}>
+          No mood entries yet
+        </p>
+        <p className="text-sm">Start tracking your mood to see your history!</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-xl font-semibold text-gray-800 mb-4">
+    <div className="space-y-4 animate-fadeIn">
+      <h3 className="text-lg sm:text-xl font-semibold mb-4" style={{ color: "var(--foreground)" }}>
         Your Mood History
       </h3>
       <div className="space-y-3">
@@ -75,26 +78,25 @@ export default function MoodList({ entries, onUpdate }: MoodListProps) {
           return (
             <div
               key={entry.id}
-              className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg
-                       transition-shadow duration-200"
+              className="glass-card rounded-2xl p-4 hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-4 flex-1">
-                  <span className="text-4xl">{moodData.emoji}</span>
-                  <div className="flex-1">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+                  <span className="text-3xl sm:text-4xl flex-shrink-0">{moodData.emoji}</span>
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span
-                        className="font-semibold text-lg"
+                        className="font-semibold text-base sm:text-lg"
                         style={{ color: moodData.color }}
                       >
                         {moodData.label}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500 mb-2">
+                    <p className="text-xs sm:text-sm mb-2" style={{ color: "var(--foreground-secondary)" }}>
                       {formatDate(entry.timestamp)}
                     </p>
                     {entry.note && (
-                      <p className="text-gray-700 text-sm leading-relaxed">
+                      <p className="text-sm leading-relaxed break-words" style={{ color: "var(--foreground)" }}>
                         {entry.note}
                       </p>
                     )}
@@ -103,9 +105,20 @@ export default function MoodList({ entries, onUpdate }: MoodListProps) {
                 <button
                   onClick={() => handleDelete(entry.id)}
                   disabled={deletingId === entry.id}
-                  className="text-red-500 hover:text-red-700 p-2 rounded-lg
-                           hover:bg-red-50 transition-colors disabled:opacity-50"
+                  className="p-2 rounded-xl transition-all flex-shrink-0 active:animate-buttonPress"
+                  style={{
+                    color: "#ff3b30",
+                    backgroundColor: deletingId === entry.id ? "rgba(255, 59, 48, 0.1)" : "transparent",
+                  }}
                   aria-label="Delete entry"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(255, 59, 48, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (deletingId !== entry.id) {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                    }
+                  }}
                 >
                   {deletingId === entry.id ? (
                     <span className="text-sm">...</span>

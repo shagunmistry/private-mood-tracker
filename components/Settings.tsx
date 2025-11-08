@@ -48,30 +48,34 @@ export default function Settings({ onImported }: SettingsProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fadeIn">
       <div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">
+        <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--foreground)" }}>
           Export Your Data
         </h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm mb-4" style={{ color: "var(--foreground-secondary)" }}>
           Download your mood diary data to keep a backup or use elsewhere.
         </p>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => handleExport("json")}
             disabled={isExporting}
-            className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white
-                     font-medium py-3 px-4 rounded-lg shadow
-                     transition-colors disabled:opacity-50"
+            className="flex-1 font-medium py-3 px-4 rounded-2xl shadow-md transition-all hover:opacity-90 active:animate-buttonPress disabled:opacity-50"
+            style={{
+              backgroundColor: "var(--accent-primary)",
+              color: "#ffffff",
+            }}
           >
             {isExporting ? "Exporting..." : "Export as JSON"}
           </button>
           <button
             onClick={() => handleExport("csv")}
             disabled={isExporting}
-            className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white
-                     font-medium py-3 px-4 rounded-lg shadow
-                     transition-colors disabled:opacity-50"
+            className="flex-1 font-medium py-3 px-4 rounded-2xl shadow-md transition-all hover:opacity-90 active:animate-buttonPress disabled:opacity-50"
+            style={{
+              backgroundColor: "var(--accent-primary)",
+              color: "#ffffff",
+            }}
           >
             {isExporting ? "Exporting..." : "Export as CSV"}
           </button>
@@ -79,16 +83,18 @@ export default function Settings({ onImported }: SettingsProps) {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">
+        <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--foreground)" }}>
           Import Data
         </h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm mb-4" style={{ color: "var(--foreground-secondary)" }}>
           Restore your mood diary from a previously exported JSON file.
         </p>
         <label
-          className="block w-full bg-green-500 hover:bg-green-600 text-white
-                   font-medium py-3 px-4 rounded-lg shadow text-center
-                   cursor-pointer transition-colors"
+          className="block w-full font-medium py-3 px-4 rounded-2xl shadow-md text-center cursor-pointer transition-all hover:opacity-90 active:animate-buttonPress"
+          style={{
+            backgroundColor: "#34c759",
+            color: "#ffffff",
+          }}
         >
           {isImporting ? "Importing..." : "Import from JSON"}
           <input
@@ -101,14 +107,15 @@ export default function Settings({ onImported }: SettingsProps) {
         </label>
       </div>
 
-      <div className="border-t pt-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">
+      <div style={{ borderTop: "1px solid var(--card-border)", paddingTop: "1.5rem" }}>
+        <h3 className="text-lg font-semibold mb-3" style={{ color: "var(--foreground)" }}>
           Privacy & Storage
         </h3>
-        <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+        <div className="glass-card rounded-2xl p-4" style={{ backgroundColor: "rgba(52, 199, 89, 0.1)" }}>
           <div className="flex items-start gap-3">
             <svg
-              className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5"
+              className="w-6 h-6 flex-shrink-0 mt-0.5"
+              style={{ color: "#34c759" }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -121,10 +128,10 @@ export default function Settings({ onImported }: SettingsProps) {
               />
             </svg>
             <div>
-              <p className="font-semibold text-green-800 mb-1">
+              <p className="font-semibold mb-1" style={{ color: "#34c759" }}>
                 100% Private & Local
               </p>
-              <p className="text-sm text-green-700">
+              <p className="text-sm" style={{ color: "var(--foreground-secondary)" }}>
                 All your mood entries are stored locally on your device using
                 IndexedDB. No data is ever sent to any server. You have complete
                 control over your data.
@@ -134,18 +141,22 @@ export default function Settings({ onImported }: SettingsProps) {
         </div>
       </div>
 
-      <div className="border-t pt-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">
+      <div style={{ borderTop: "1px solid var(--card-border)", paddingTop: "1.5rem" }}>
+        <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--foreground)" }}>
           Cloud Backup (Coming Soon)
         </h3>
-        <p className="text-sm text-gray-600 mb-4">
+        <p className="text-sm mb-4" style={{ color: "var(--foreground-secondary)" }}>
           Optional cloud backup integration with Google Drive will be available
           in a future update. Your data will remain encrypted and private.
         </p>
         <button
           disabled
-          className="w-full bg-gray-300 text-gray-500 font-medium py-3 px-4
-                   rounded-lg cursor-not-allowed"
+          className="w-full font-medium py-3 px-4 rounded-2xl cursor-not-allowed opacity-50"
+          style={{
+            backgroundColor: "var(--card-background)",
+            color: "var(--foreground-secondary)",
+            border: "1px solid var(--card-border)",
+          }}
         >
           Google Drive Backup (Coming Soon)
         </button>

@@ -47,14 +47,31 @@ export default function MoodEntryModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 animate-fadeIn"
+      className="fixed inset-0 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50 animate-fadeIn"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+      }}
       onClick={handleBackdropClick}
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 transform transition-all animate-scaleIn"
+        className="glass-card rounded-t-3xl sm:rounded-3xl max-w-md w-full p-6 transform transition-all animate-slideUp sm:animate-scaleIn safe-area-inset-bottom"
         onClick={(e) => e.stopPropagation()}
+        style={{
+          maxHeight: "90vh",
+          overflowY: "auto",
+        }}
       >
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Drag indicator for mobile */}
+          <div className="flex justify-center sm:hidden -mt-2 mb-2">
+            <div
+              className="w-10 h-1 rounded-full"
+              style={{ backgroundColor: "var(--card-border)" }}
+            ></div>
+          </div>
+
           {/* Header with selected mood */}
           <div className="text-center">
             <div
@@ -66,10 +83,10 @@ export default function MoodEntryModal({
             >
               <span className="text-5xl">{moodData.emoji}</span>
             </div>
-            <h2 className="text-2xl font-semibold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-semibold" style={{ color: "var(--foreground)" }}>
               Feeling {moodData.label}
             </h2>
-            <p className="text-gray-600 text-sm mt-1">
+            <p className="text-sm mt-1" style={{ color: "var(--foreground-secondary)" }}>
               Add a note about your mood (optional)
             </p>
           </div>
@@ -82,12 +99,24 @@ export default function MoodEntryModal({
               placeholder="What's on your mind?"
               rows={5}
               autoFocus
-              className="w-full px-4 py-3 rounded-xl border-2 border-gray-200
-                       focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200
-                       transition-colors resize-none text-gray-800"
+              className="w-full px-4 py-3 rounded-2xl resize-none transition-all"
+              style={{
+                border: "1px solid var(--card-border)",
+                backgroundColor: "var(--background-secondary)",
+                color: "var(--foreground)",
+                outline: "none",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "var(--accent-primary)";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0, 122, 255, 0.1)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "var(--card-border)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
               maxLength={500}
             />
-            <div className="text-right text-sm text-gray-500 mt-1">
+            <div className="text-right text-sm mt-1" style={{ color: "var(--foreground-secondary)" }}>
               {note.length}/500
             </div>
           </div>
@@ -98,19 +127,19 @@ export default function MoodEntryModal({
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="flex-1 px-6 py-3 rounded-xl border-2 border-gray-300
-                       text-gray-700 font-semibold hover:bg-gray-50
-                       transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-3 rounded-2xl font-semibold transition-all active:animate-buttonPress disabled:opacity-50"
+              style={{
+                border: "1px solid var(--card-border)",
+                backgroundColor: "var(--background-secondary)",
+                color: "var(--foreground)",
+              }}
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-6 py-3 rounded-xl font-semibold text-white
-                       transition-all duration-200 transform hover:scale-[1.02]
-                       disabled:opacity-50 disabled:cursor-not-allowed
-                       disabled:transform-none shadow-lg"
+              className="flex-1 px-6 py-3 rounded-2xl font-semibold text-white transition-all hover:opacity-90 active:animate-buttonPress disabled:opacity-50 shadow-md"
               style={{
                 backgroundColor: moodData.color,
               }}

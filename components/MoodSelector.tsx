@@ -14,32 +14,38 @@ export default function MoodSelector({
   const moods = Object.entries(MOOD_OPTIONS) as [MoodType, typeof MOOD_OPTIONS[MoodType]][];
 
   return (
-    <div className="grid grid-cols-3 gap-4 mb-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
       {moods.map(([moodType, { emoji, label, color }]) => (
         <button
           key={moodType}
           onClick={() => onSelect(moodType)}
           className={`
-            flex flex-col items-center justify-center p-6 rounded-2xl
-            transition-all duration-200 transform
+            flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl sm:rounded-3xl
+            transition-all active:animate-buttonPress
             ${
               selectedMood === moodType
-                ? "scale-105 shadow-lg"
+                ? "scale-105 shadow-lg ring-2"
                 : "hover:scale-105 shadow-md hover:shadow-lg"
             }
           `}
           style={{
-            backgroundColor: selectedMood === moodType ? color : "#f8fafc",
-            borderColor: color,
-            borderWidth: selectedMood === moodType ? "2px" : "1px",
+            backgroundColor: selectedMood === moodType ? color : "var(--card-background)",
+            borderColor: selectedMood === moodType ? color : "var(--card-border)",
+            borderWidth: "1px",
             borderStyle: "solid",
-          }}
+            transition: "all var(--transition-base)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+          } as React.CSSProperties}
         >
-          <span className="text-4xl mb-2">{emoji}</span>
+          <span className="text-3xl sm:text-4xl mb-1 sm:mb-2">{emoji}</span>
           <span
-            className={`text-sm font-medium ${
-              selectedMood === moodType ? "text-white" : "text-gray-700"
+            className={`text-xs sm:text-sm font-medium ${
+              selectedMood === moodType ? "text-white" : ""
             }`}
+            style={{
+              color: selectedMood === moodType ? "#ffffff" : "var(--foreground)",
+            }}
           >
             {label}
           </span>
