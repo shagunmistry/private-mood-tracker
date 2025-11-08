@@ -112,8 +112,20 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <footer className="text-center text-xs sm:text-sm" style={{ color: "var(--foreground-secondary)" }}>
+        <footer className="text-center text-xs sm:text-sm space-y-2" style={{ color: "var(--foreground-secondary)" }}>
           <p>🔒 Your data is stored locally and never leaves your device</p>
+          <p>
+            Made with open source ❤️ •{" "}
+            <a
+              href="https://github.com/shagunmistry/private-mood-tracker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:opacity-80 transition-opacity"
+              style={{ color: "var(--accent-primary)" }}
+            >
+              Contribute on GitHub
+            </a>
+          </p>
         </footer>
       </div>
     </div>
