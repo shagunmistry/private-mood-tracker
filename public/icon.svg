@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="#6366f1"/>
+
+  <!-- Emoji-style face -->
+  <circle cx="256" cy="256" r="180" fill="#ffffff"/>
+
+  <!-- Happy eyes -->
+  <circle cx="200" cy="220" r="20" fill="#6366f1"/>
+  <circle cx="312" cy="220" r="20" fill="#6366f1"/>
+
+  <!-- Happy smile -->
+  <path d="M 170 280 Q 256 350 342 280"
+        stroke="#6366f1"
+        stroke-width="20"
+        stroke-linecap="round"
+        fill="none"/>
+</svg>
